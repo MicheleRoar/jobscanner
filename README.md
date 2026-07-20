@@ -1,106 +1,74 @@
-# jobscanner
+# jobscanner ⚡️
 
-**Stop refreshing 90 careers pages by hand.** jobscanner is a small, self-hosted
-job board watcher: point it at the careers pages you care about, and every
-morning it tells you what's new — filtered to the roles that actually match
-your profile, with a clean dashboard to track applications, favorites, and
-follow-ups.
+Stop refreshing careers pages by hand - jobscanner finds new job postings
+for you and keeps a tidy dashboard to manage applications, favorites and
+follow-ups. It's lightweight, self-hosted and focused on ML/AI/bioinfo
+roles around French-speaking Switzerland, but fully configurable.
 
-Built for one specific job hunt (ML / LLM / computer vision / bioinformatics
-roles around French-speaking Switzerland — EPFL, SIB, CHUV, and ~90 startups
-and companies), but the whole thing is just a keyword list and a site
-catalog in JSON, so it's easy to repoint at a different field or region.
+🚀 Key features
 
-## What it actually does
+- Daily scans of configured career pages (Playwright/Chromium).
+- Multilingual keyword matching (EN/FR/IT) tuned for ML / LLM / CV / bioinfo.
+- Tracks new/closed postings, favorites, notes, and spontaneous-application
+  statuses with follow-up reminders.
+- Discovery helpers: find company career pages automatically (SwissBiotech
+  directory integration + Google CSE support).
+- Staging for discovered sites — review before adding to your scan list.
 
-- Crawls ~80 careers pages a day (headless Chromium via Playwright),
-  follows pagination across multiple pages, and matches postings against a
-  multilingual (EN/FR/IT) keyword list.
-- Handles a handful of ATS platforms (Workable, SmartRecruiters) through
-  their public APIs directly, since their pages render postings as
-  JS-only cards that a plain crawler can't see.
-- Each site scan runs in its own process with a hard timeout — one slow or
-  hung page can't stall the whole run.
-- Tracks what's new since the last scan, what's closed, what you've
-  applied to, and what you've dismissed as irrelevant.
-- Lets you star postings as favorites, add private notes, and mark
-  spontaneous-application-only companies with a follow-up reminder after
-  21 days of silence.
-- Sends a summary email when new postings show up (optional — the app
-  works fine without SMTP configured, it just won't email you).
-- One dashboard, no login, no database — everything lives in a JSON file
-  on disk.
+⚠️ Opinionated constraints
 
-## Honest limitations
+- Designed for single-user, home/server use. If you expose the port to
+  the internet, protect it with a reverse proxy or VPN — there is no
+  built-in authentication by default.
 
-- "Relevant posting" detection is keyword matching on link text. It works
-  well on most classic careers portals, but on unusual sites it may find
-  nothing, or a false positive or two. If a site stops giving sensible
-  results, it's worth opening it by hand once in a while to check it
-  hasn't changed structure — the dashboard's status table flags sites at
-  0 results or in error to make this easy.
-- This is not an enterprise tool: it's meant to run on a home NAS or a
-  spare machine, for a single user. There's no authentication on the
-  dashboard — if you expose the port to the internet, put it behind a VPN
-  or a reverse proxy with a login.
+Requirements 🧰
 
-## Requirements
+- Python dependencies are in `requirements.txt` (Flask, Playwright,
+  APScheduler, Requests, BeautifulSoup).
 
-- A Synology NAS with **DSM 7** and the **Container Manager** package
-  (found in Package Center; on older DSM versions it was called "Docker" —
-  the steps are the same). Or really, anything that runs Docker Compose.
+Quick start (local) ▶️
 
-## Installation (step by step)
+1. Install dependencies:
 
-1. **Copy this folder to your NAS.** Open File Station, create a folder
-   (e.g. `docker/jobscanner`), and drag in all the files from this project
-   (including the `templates/`, `static/`, and `data/` subfolders).
+```bash
+python -m pip install -r requirements.txt
+```
 
-2. **Configure email.** In that folder, rename `.env.example` to `.env`
-   and open it with a text editor. Fill in at least `SMTP_HOST`,
-   `SMTP_USER`, `SMTP_PASS`, `EMAIL_TO`. For Gmail you need an "app
-   password" (not your regular account password) — generate one at
-   https://myaccount.google.com/apppasswords
+2. Run locally:
 
-3. **Open Container Manager** → **Project** tab → **Create**.
-   - Project name: `jobscanner`
-   - Path: select the folder you copied in step 1
-   - Container Manager will auto-detect `docker-compose.yml`
-   - Click **Next** then **Done**: the first build takes a few minutes
-     (it downloads the image with Chromium bundled in, about 1–1.5 GB).
+```bash
+python app.py
+# then open http://localhost:5001
+```
 
-4. **Open the dashboard.** Go to `http://<your-nas-ip>:5000` in a
-   browser. If you set `RUN_ON_STARTUP=true` in `.env`, the first scan
-   kicks off automatically (it can take a while to crawl every site).
+Discovery (Swiss Biotech) 🔎
 
-5. **Done.** From here on the container just runs, scans every day at the
-   time set in `SCAN_TIME` (07:00 by default), and emails you if it finds
-   something new. You can also force an immediate scan from the "Scan
-   now" button in the dashboard.
+You can run an automatic discovery of biotech companies listed on
+SwissBiotech and probe their career pages (no API keys required):
 
-## Updating the site list
+```bash
+curl "http://localhost:5001/discover?source=swissbiotech"
+```
 
-Open `sites.json` and add/remove entries. Each entry has:
-- `id`: short, unique identifier
-- `name`: name shown in the dashboard
-- `url`: the "careers" page to scan
-- `scan`: `true` to scan it, `false` if the site only accepts spontaneous
-  applications (it'll be shown in a separate reminder list instead,
-  without wasting time scanning it)
+This will return a JSON list of discovered companies with:
+- `name`, `domain`, `profile_url`, `career_url`, `location`, `distance_km`
 
-After editing, restart the container from Container Manager (Project →
-jobscanner → Restart) — no need to rebuild the image.
+Security & data 🔐
 
-## Backup
+- State lives in `data/jobs_data.json` and `data/sites.json`. Don't commit
+  these files (they may contain personal notes and state).
+- `add-site` is validated to reduce SSRF risk (scheme/domain checks,
+  private IP blocking, reachability checks).
+What's next (ideas)
 
-All state (postings already seen, applications, favorites, notes) lives in
-`data/jobs_data.json`. If you delete it, the monitor "forgets" what it had
-already seen and the next scan will treat everything as new — useful if
-you want to start fresh, best avoided if you don't want an email with
-dozens of "new" postings you already knew about.
+- Migrate storage to SQLite for safer concurrent writes and richer queries.
+- Add CV matching and explainable scoring.
+- Generate personalized cover letters from templates.
 
-## Stack
+Contributing
 
-Flask + APScheduler for the app and daily schedule, Playwright/Chromium
-for crawling, plain JSON files for storage — no database to set up or
-maintain.
+PRs and issues welcome. If you add new discovery sources, try to return
+results in staging so users can review before adding to the scan list.
+
+Enjoy - and let me know if you want me to wire the discovery results
+directly into the scanner or to a SQLite backend! ✨
