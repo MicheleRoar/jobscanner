@@ -1,0 +1,15 @@
+# personal runtime data — job tracking, application notes, site edits
+data/*.json
+!data/.gitkeep
+
+# secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# editor/tooling
+.claude/
+.DS_Store

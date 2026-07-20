@@ -1,0 +1,36 @@
+{# expected variable: j (the single job posting) #}
+<div class="job-row {{ 'applied' if j.applied }}">
+  <form method="post" action="{{ url_for('toggle_favorite_route') }}" class="star-form">
+    <input type="hidden" name="job_key" value="{{ j._key }}">
+    <button class="star-btn {{ 'is-fav' if j.favorite }}" type="submit"
+            title="{{ 'Remove from favorites' if j.favorite else 'Add to favorites' }}"
+            aria-label="{{ 'Remove from favorites' if j.favorite else 'Add to favorites' }}">
+      {{ '★' if j.favorite else '☆' }}
+    </button>
+  </form>
+  <div class="job-main">
+    {% if j.applied %}<span class="badge-applied">applied ✓</span>{% endif %}
+    <span class="job-title">{{ j.title }}</span>
+    <div class="job-site">found on {{ j.first_seen }}{% if j.applied_date %} · applied on {{ j.applied_date }}{% endif %}</div>
+    {% if j.note %}<div class="job-note-preview">📝 {{ j.note }}</div>{% endif %}
+  </div>
+  <div class="job-actions">
+    <a class="job-link" href="{{ j.url }}" target="_blank" rel="noopener">open ↗</a>
+    <form method="post" action="{{ url_for('toggle_applied_route') }}">
+      <input type="hidden" name="job_key" value="{{ j._key }}">
+      <button class="small-btn" type="submit">{{ 'unmark applied' if j.applied else 'mark as applied' }}</button>
+    </form>
+    <form method="post" action="{{ url_for('toggle_dismissed_route') }}">
+      <input type="hidden" name="job_key" value="{{ j._key }}">
+      <button class="small-btn small-btn-muted" type="submit">not relevant</button>
+    </form>
+    <details class="note-toggle">
+      <summary class="small-btn">note</summary>
+      <form method="post" action="{{ url_for('save_note_route') }}" class="note-form">
+        <input type="hidden" name="job_key" value="{{ j._key }}">
+        <textarea name="note" placeholder="Contacts, referral, CV version used...">{{ j.note }}</textarea>
+        <button class="small-btn" type="submit">save note</button>
+      </form>
+    </details>
+  </div>
+</div>

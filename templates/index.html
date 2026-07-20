@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Monitor — Michele</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="hero">
+    <p class="hero-eyebrow">Job Monitor · French-speaking Switzerland · AI + biology</p>
+    <h1>Open positions, checked every day</h1>
+    <div class="hero-meta">
+      <span>Last scan: {{ last_run or 'never run' }}</span>
+      <span>Sites monitored: {{ scanned_count }}</span>
+      <form id="scan-form" method="post" action="{{ url_for('manual_scan') }}" style="margin:0;">
+        <button id="scan-button" class="scan-btn{% if scan_state.running %} is-loading{% endif %}" type="submit"{% if scan_state.running %} disabled{% endif %}>
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="scan-btn-label">{{ 'Scan in progress...' if scan_state.running else 'Scan now' }}</span>
+        </button>
+      </form>
+    </div>
+    {% if scan_state.running or scan_state.message %}
+      <div class="scan-status-banner" role="status" aria-live="polite">
+        {% if scan_state.running %}
+          ⏳ {{ scan_state.message }}
+        {% else %}
+          ✓ {{ scan_state.message }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  <main>
+    <h2>Favorites ★ ({{ favorite_jobs|length }})</h2>
+    {% if favorite_jobs %}
+      {% for site_name, site_jobs in favorite_jobs|groupby('site') %}
+        {% set jl = site_jobs|list %}
+        <details class="site-group fav-group" open>
+          <summary>{{ site_name }} — {{ jl|length }} position{{ 's' if jl|length != 1 }}</summary>
+          {% for j in jl %}
+            {% include "_job_row.html" %}
+          {% endfor %}
+        </details>
+      {% endfor %}
+    {% else %}
+      <p class="empty">No favorites yet: click the ☆ star next to a posting to save it here.</p>
+    {% endif %}
+
+    <h2>New today ({{ new_today|length }})</h2>
+    {% if new_today %}
+      {% for site_name, site_jobs in new_today|groupby('site') %}
+        {% set jl = site_jobs|list %}
+        <details class="site-group" open>
+          <summary><span class="badge-new">new</span> {{ site_name }} — {{ jl|length }} position{{ 's' if jl|length != 1 }}</summary>
+          {% for j in jl %}
+            {% include "_job_row.html" %}
+          {% endfor %}
+        </details>
+      {% endfor %}
+    {% else %}
+      <p class="empty">No new postings in the last scan.</p>
+    {% endif %}
+
+    <h2>All active positions ({{ active_jobs|length }})</h2>
+    {% if active_jobs %}
+      {% for site_name, site_jobs in active_jobs|groupby('site') %}
+        {% set jl = site_jobs|list %}
+        <details class="site-group">
+          <summary>{{ site_name }} — {{ jl|length }} position{{ 's' if jl|length != 1 }}</summary>
+          {% for j in jl %}
+            {% include "_job_row.html" %}
+          {% endfor %}
+        </details>
+      {% endfor %}
+    {% else %}
+      <p class="empty">No scan has run yet, or no relevant position found so far. Try "Scan now".</p>
+    {% endif %}
+
+    {% if closed_jobs %}
+      <h2>No longer listed ({{ closed_jobs|length }})</h2>
+      {% for site_name, site_jobs in closed_jobs|groupby('site') %}
+        {% set jl = site_jobs|list %}
+        <details class="site-group">
+          <summary>{{ site_name }} — {{ jl|length }} position{{ 's' if jl|length != 1 }} no longer listed</summary>
+          {% for j in jl %}
+            <div class="job-row closed">
+              <div>
+                {% if j.applied %}<span class="badge-applied">applied ✓</span>{% endif %}
+                <span class="job-title">{{ j.title }}</span>
+                <div class="job-site">seen since {{ j.first_seen }}, probably closed</div>
+              </div>
+            </div>
+          {% endfor %}
+        </details>
+      {% endfor %}
+    {% endif %}
+
+    {% if dismissed_jobs %}
+      <details class="site-group">
+        <summary>Hidden as not relevant ({{ dismissed_jobs|length }})</summary>
+        {% for j in dismissed_jobs %}
+          <div class="job-row closed">
+            <div>
+              <span class="job-title">{{ j.title }}</span>
+              <div class="job-site">{{ j.site }}</div>
+            </div>
+            <form method="post" action="{{ url_for('toggle_dismissed_route') }}">
+              <input type="hidden" name="job_key" value="{{ j._key }}">
+              <button class="small-btn" type="submit">make visible again</button>
+            </form>
+          </div>
+        {% endfor %}
+      </details>
+    {% endif %}
+
+    <h2>Spontaneous applications only — reminders ({{ spontaneous_sites|length }})</h2>
+    <p class="note">These don't have an actual postings page to check — they only accept spontaneous applications. Companies waiting for a follow-up for more than 21 days are shown first, highlighted.</p>
+    <div class="spont-grid">
+      {% for s in spontaneous_sites %}
+        <div class="spont-card status-{{ s.status }} {{ 'followup' if s.needs_followup }}">
+          {% if s.needs_followup %}<span class="badge-followup">follow-up suggested — {{ s.days_since }}d ago</span>{% endif %}
+          <span class="spont-name">{{ s.name }}</span>
+          {% if s.applied_date %}<span class="job-site">applied on {{ s.applied_date }}</span>{% endif %}
+          {% if s.note %}<div class="job-note-preview">📝 {{ s.note }}</div>{% endif %}
+          <div class="job-actions">
+            <a class="job-link" href="{{ s.url }}" target="_blank" rel="noopener">open ↗</a>
+          </div>
+          <form method="post" action="{{ url_for('set_spontaneous_route') }}" class="spont-status-form">
+            <input type="hidden" name="site_id" value="{{ s.id }}">
+            <select name="status">
+              <option value="to_apply" {{ 'selected' if s.status == 'to_apply' }}>To apply</option>
+              <option value="applied" {{ 'selected' if s.status == 'applied' }}>Applied</option>
+              <option value="responded" {{ 'selected' if s.status == 'responded' }}>Response received</option>
+            </select>
+            <button class="small-btn" type="submit">update</button>
+          </form>
+          <details class="note-toggle">
+            <summary class="small-btn">note</summary>
+            <form method="post" action="{{ url_for('save_spontaneous_note_route') }}" class="note-form">
+              <input type="hidden" name="site_id" value="{{ s.id }}">
+              <textarea name="note" placeholder="Contact, referral, date of last message...">{{ s.note }}</textarea>
+              <button class="small-btn" type="submit">save note</button>
+            </form>
+          </details>
+        </div>
+      {% endfor %}
+    </div>
+
+    <h2>Add a source manually</h2>
+    <p class="note">Found a company that isn't in the list yet (e.g. Nestlé)? Paste the link to their careers page here.</p>
+    <form method="post" action="{{ url_for('add_site_route') }}" class="add-site-form">
+      <input type="text" name="name" placeholder="Company name" required>
+      <input type="url" name="url" placeholder="https://... link to the careers page" required>
+      <select name="mode">
+        <option value="scan">Has postings to monitor</option>
+        <option value="spontaneous">Spontaneous applications only</option>
+      </select>
+      <select name="curated">
+        <option value="">Curated?</option>
+        <option value="manual">manual</option>
+        <option value="claude">claude</option>
+      </select>
+      <button class="scan-btn" type="submit">Add</button>
+    </form>
+
+    <h2>Status by site — to double-check</h2>
+    <p class="note">This table updates itself on every scan. Sites at 0 postings or in error should be checked by hand every now and then: it could be a false negative (the site changed structure, or it simply has no open positions right now). Sorted with problems first.</p>
+    <table class="status-table">
+      <thead>
+        <tr><th>Site</th><th>Found</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for s in site_status %}
+        <tr class="{{ 'row-error' if s.error else ('row-zero' if s.count == 0 else 'row-ok') }}">
+          <td>
+            {{ s.name }}
+            {% if s.curated %}
+              <span class="badge-curated">{{ s.curated }}</span>
+            {% endif %}
+          </td>
+          <td>{{ s.count }}</td>
+          <td>{% if s.error %}error: {{ s.error }}{% elif s.count == 0 %}0 results — check by hand{% else %}ok{% endif %}</td>
+          <td><a class="job-link" href="{{ s.url }}" target="_blank" rel="noopener">open site ↗</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('scan-form');
+      const button = document.getElementById('scan-button');
+
+      if (!form || !button) return;
+
+      form.addEventListener('submit', () => {
+        button.disabled = true;
+        button.classList.add('is-loading');
+        const label = button.querySelector('.scan-btn-label');
+        if (label) {
+          label.textContent = 'Scan in progress...';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

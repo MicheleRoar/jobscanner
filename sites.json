@@ -1,0 +1,566 @@
+[
+  {
+    "id": "epfl",
+    "name": "EPFL",
+    "url": "https://careers.epfl.ch/go/Personnel-Scientifique/504674/",
+    "scan": true
+  },
+  {
+    "id": "sib",
+    "name": "SIB Swiss Institute of Bioinformatics",
+    "url": "https://apply.refline.ch/499599/search.html",
+    "scan": true
+  },
+  {
+    "id": "chuv",
+    "name": "CHUV",
+    "url": "https://recrutement.chuv.ch/wd_portal_cand.login?p_web_site_id=5352#filter=p_web_site_id%3D5352%26p_published_to%3DWWW%26p_language%3DDEFAULT%26p_direct%3DY%26p_format%3DMOBILE%26p_category_code_arr%3D14093-574797%26p_search%3D",
+    "scan": true
+  },
+  {
+    "id": "csem",
+    "name": "CSEM",
+    "url": "https://www.csem.ch/en/careers",
+    "scan": true
+  },
+  {
+    "id": "sdsc",
+    "name": "Swiss Data Science Center",
+    "url": "https://www.datascience.ch/careers",
+    "scan": true
+  },
+  {
+    "id": "idiap",
+    "name": "Idiap Research Institute",
+    "url": "https://www.idiap.ch/en/careers#jobs",
+    "scan": true
+  },
+  {
+    "id": "unil",
+    "name": "Université de Lausanne (UNIL)",
+    "url": "https://career5.successfactors.eu/career?company=universitdP&career_ns=job_listing_summary&navBarLevel=JOB_SEARCH&_s.crb=PsccOVQ6GYtc2oETUbXzVmM3LAk%3d",
+    "scan": true
+  },
+  {
+    "id": "unige",
+    "name": "Université de Genève (UNIGE)",
+    "url": "https://jobs.unige.ch/www/wd_portal.search_results?p_web_site_id=1&p_category_id=1&p_suppress_params_on_error=N&p_show_results=Y&p_form_type=CHECKBOX&p1=51&p1_val=30&p1_val=31&p1_val=40&p2=46&p2_val=Any&p_text=&p_save_search=N",
+    "scan": true
+  },
+  {
+    "id": "the_sense",
+    "name": "The Sense",
+    "url": "https://www.the-sense.ch/career/?lang=en",
+    "scan": false
+  },
+  {
+    "id": "wyss_center",
+    "name": "Wyss Center for Bio and Neuroengineering",
+    "url": "https://wysscenter.ch/join-our-team/",
+    "scan": true
+  },
+  {
+    "id": "biofactory_cc",
+    "name": "Biofactory Competence Center",
+    "url": "https://careers.hefr.ch/job-seekers.php",
+    "scan": true
+  },
+  {
+    "id": "debiopharm",
+    "name": "Debiopharm",
+    "url": "https://www.debiopharm.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "sophia_genetics",
+    "name": "SOPHiA GENETICS",
+    "url": "https://careers.sophiagenetics.com/jobs/search?page=1&country_codes%5B%5D=CH&query=",
+    "scan": true
+  },
+  {
+    "id": "adaptyv",
+    "name": "Adaptyv Bio",
+    "url": "https://www.adaptyvbio.com/careers",
+    "scan": true
+  },
+  {
+    "id": "haya",
+    "name": "HAYA Therapeutics",
+    "url": "https://www.hayatx.com/careers/",
+    "scan": false
+  },
+  {
+    "id": "biolizard",
+    "name": "BioLizard",
+    "url": "https://lizard.bio/careers/",
+    "scan": true
+  },
+  {
+    "id": "chairon",
+    "name": "chAIron",
+    "url": "https://www.chairon.ch/",
+    "scan": false
+  },
+  {
+    "id": "novigenix_ai",
+    "name": "Novigenix AI",
+    "url": "https://www.novigenix.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "parithera",
+    "name": "Parithera",
+    "url": "https://www.parithera.com/",
+    "scan": true
+  },
+  {
+    "id": "twinedge",
+    "name": "TwinEdge Bioscience",
+    "url": "https://www.biopole.ch/company/twinedge-bioscience/",
+    "scan": true
+  },
+  {
+    "id": "volv_global",
+    "name": "Volv Global",
+    "url": "https://www.biopole.ch/company/volv-global/",
+    "scan": true
+  },
+  {
+    "id": "aiqimia",
+    "name": "Ai.Qimia",
+    "url": "https://www.aiqimia.com/",
+    "scan": false
+  },
+  {
+    "id": "ai4bio",
+    "name": "ai4bio",
+    "url": "https://www.ai4bio.ch/",
+    "scan": false
+  },
+  {
+    "id": "baio_labs",
+    "name": "Baio Labs",
+    "url": "https://www.baiolabs.com/",
+    "scan": false
+  },
+  {
+    "id": "d36",
+    "name": "D36.ch",
+    "url": "https://www.d36.ch/",
+    "scan": true
+  },
+  {
+    "id": "genomsys",
+    "name": "GenomSys",
+    "url": "https://genomsys.com/career/",
+    "scan": true
+  },
+  {
+    "id": "inait",
+    "name": "INAIT",
+    "url": "https://www.inait.ai/careers",
+    "scan": true
+  },
+  {
+    "id": "metadvice",
+    "name": "Metadvice",
+    "url": "https://www.metadvice.com/",
+    "scan": true
+  },
+  {
+    "id": "nexco_analytics",
+    "name": "Nexco Analytics",
+    "url": "https://nexco.ch/careers",
+    "scan": true
+  },
+  {
+    "id": "phenomx",
+    "name": "PhenomX Health",
+    "url": "https://www.phenomxhealth.com/",
+    "scan": false
+  },
+  {
+    "id": "saphetor",
+    "name": "Saphetor",
+    "url": "https://www.saphetor.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "smartgene",
+    "name": "SmartGene Services",
+    "url": "https://www.smartgene.com/",
+    "scan": true
+  },
+  {
+    "id": "tune_insight",
+    "name": "Tune Insight",
+    "url": "https://tuneinsight.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "nagi_bioscience",
+    "name": "Nagi Bioscience",
+    "url": "https://join.com/companies/nagibio",
+    "scan": true
+  },
+  {
+    "id": "alithea_genomics",
+    "name": "Alithea Genomics",
+    "url": "https://alitheagenomics.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "ac_immune",
+    "name": "AC Immune",
+    "url": "https://www.acimmune.com/careers/join-us/",
+    "scan": true
+  },
+  {
+    "id": "vivent",
+    "name": "Vivent Biosignals",
+    "url": "https://vivent-biosignals.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "sun_bioscience",
+    "name": "Sun Bioscience (DOPPL)",
+    "url": "https://www.sunbioscience.ch/",
+    "scan": true
+  },
+  {
+    "id": "multiwave",
+    "name": "Multiwave Technologies",
+    "url": "https://multiwave.ch/careers/",
+    "scan": false
+  },
+  {
+    "id": "adoram",
+    "name": "Adoram Therapeutics",
+    "url": "https://www.adoram.com/",
+    "scan": false
+  },
+  {
+    "id": "deegtal",
+    "name": "dEEGtal Insights",
+    "url": "https://wysscenter.ch/join-our-team/",
+    "scan": true
+  },
+  {
+    "id": "global_dermatology",
+    "name": "Global Dermatology",
+    "url": "https://www.globaldermatology.com/",
+    "scan": true
+  },
+  {
+    "id": "drugdesigntech",
+    "name": "Drugdesigntech",
+    "url": "https://www.drugdesigntech.com/",
+    "scan": true
+  },
+  {
+    "id": "stalicla",
+    "name": "STALICLA",
+    "url": "https://www.stalicla.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "genevault",
+    "name": "GeneVault (SGDL Health)",
+    "url": "https://www.swissbiotech.org/region/ge/",
+    "scan": false
+  },
+  {
+    "id": "owkin",
+    "name": "Owkin Switzerland",
+    "url": "https://www.owkin.com/careers",
+    "scan": true
+  },
+  {
+    "id": "brainquant",
+    "name": "BrainQuant",
+    "url": "https://www.brainquant.ch/join-our-team",
+    "scan": true
+  },
+  {
+    "id": "nuantic",
+    "name": "nuantic",
+    "url": "https://www.nuantic.com/careers",
+    "scan": true
+  },
+  {
+    "id": "earlysight",
+    "name": "EarlySight",
+    "url": "https://www.earlysight.com/careers",
+    "scan": true
+  },
+  {
+    "id": "aktiia",
+    "name": "Aktiia",
+    "url": "https://aktiia.com/ch/careers/",
+    "scan": true
+  },
+  {
+    "id": "datametrix",
+    "name": "Datametrix",
+    "url": "https://www.datametrix.ch/",
+    "scan": true
+  },
+  {
+    "id": "seprify",
+    "name": "Seprify",
+    "url": "https://www.seprify.com/",
+    "scan": true
+  },
+  {
+    "id": "atinary",
+    "name": "Atinary Technologies",
+    "url": "https://atinary.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "neural_concept",
+    "name": "Neural Concept",
+    "url": "https://www.neuralconcept.com/careers",
+    "scan": true
+  },
+  {
+    "id": "mindmaze",
+    "name": "Mindmaze",
+    "url": "https://www.mindmaze.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "visium",
+    "name": "Visium",
+    "url": "https://www.visium.com/join-us#open-positions",
+    "scan": true
+  },
+  {
+    "id": "elca",
+    "name": "ELCA Advisory / ELCA Informatique",
+    "url": "https://iaaras.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs",
+    "scan": true
+  },
+  {
+    "id": "biopole",
+    "name": "Biopôle (campus — aggrega più aziende)",
+    "url": "https://www.biopole.ch/biopole/biopole-careers/jobs/",
+    "scan": true
+  },
+  {
+    "id": "hilo",
+    "name": "Hilo (by Aktiia)",
+    "url": "https://apply.workable.com/hilobyaktiia/#jobs",
+    "scan": true
+  },
+  {
+    "id": "six",
+    "name": "SIX",
+    "url": "https://jobs.six-group.com/search/",
+    "scan": true
+  },
+  {
+    "id": "google",
+    "name": "Google",
+    "url": "https://careers.google.com/",
+    "scan": true
+  },
+  {
+    "id": "swisscom",
+    "name": "Swisscom",
+    "url": "https://www.swisscom.ch/en/careers",
+    "scan": true
+  },
+  {
+    "id": "unit8",
+    "name": "Unit8",
+    "url": "https://unit8.com/careers",
+    "scan": true
+  },
+  {
+    "id": "terra_quantum",
+    "name": "Terra Quantum AG",
+    "url": "https://terraquantum.swiss/careers",
+    "scan": true
+  },
+  {
+    "id": "decentriq",
+    "name": "Decentriq",
+    "url": "https://decentriq.com/careers",
+    "scan": true
+  },
+  {
+    "id": "avaloq",
+    "name": "Avaloq",
+    "url": "https://careers.smartrecruiters.com/Avaloq1",
+    "scan": true
+  },
+  {
+    "id": "meta",
+    "name": "Meta",
+    "url": "https://www.metacareers.com/",
+    "scan": true
+  },
+  {
+    "id": "mentiora_ai",
+    "name": "Mentiora AI",
+    "url": "https://mentiora.ai/careers",
+    "scan": true
+  },
+  {
+    "id": "biogen",
+    "name": "Biogen",
+    "url": "https://www.biogen.com/en_us/careers.html",
+    "scan": true
+  },
+  {
+    "id": "bachem",
+    "name": "Bachem",
+    "url": "https://careers.bachem.com/search",
+    "scan": true
+  },
+  {
+    "id": "idorsia",
+    "name": "Idorsia Pharmaceuticals Ltd",
+    "url": "https://www.idorsia.com/en/careers",
+    "scan": true
+  },
+  {
+    "id": "molecular_partners",
+    "name": "Molecular Partners",
+    "url": "https://molecularpartners.com/careers",
+    "scan": true
+  },
+  {
+    "id": "numab",
+    "name": "Numab Therapeutics AG",
+    "url": "https://www.numab.com/careers",
+    "scan": true
+  },
+  {
+    "id": "alentis",
+    "name": "Alentis Therapeutics",
+    "url": "https://alentis.ch/careers/",
+    "scan": true
+  },
+  {
+    "id": "memo_therapeutics",
+    "name": "Memo Therapeutics AG",
+    "url": "https://memo-therapeutics.com/careers",
+    "scan": true
+  },
+  {
+    "id": "nbe_therapeutics",
+    "name": "NBE-Therapeutics AG",
+    "url": "https://www.nbe-therapeutics.com/careers",
+    "scan": true
+  },
+  {
+    "id": "limmatech",
+    "name": "LimmaTech Biologics AG",
+    "url": "https://lmtbio.com/careers/",
+    "scan": true
+  },
+  {
+    "id": "glycoera",
+    "name": "GlycoEra AG",
+    "url": "https://www.glycoera.com/careers-2/",
+    "scan": true
+  },
+  {
+    "id": "bio_rad",
+    "name": "Bio-Rad Laboratories",
+    "url": "https://www.bio-rad.com/en-us/corporate/careers",
+    "scan": false
+  },
+  {
+    "id": "fore_ai",
+    "name": "fore ai",
+    "url": "https://foreai.co/careers/",
+    "scan": true
+  },
+  {
+    "id": "logicstar_ai",
+    "name": "LogicStar AI",
+    "url": "https://logicstar.ai/careers",
+    "scan": true
+  },
+  {
+    "id": "riverkin",
+    "name": "Riverkin",
+    "url": "https://riverkin.com/careers",
+    "scan": true
+  },
+  {
+    "id": "bloom_yc",
+    "name": "Bloom (YC)",
+    "url": "https://bloom.co/careers",
+    "scan": false
+  },
+  {
+    "id": "hoshii",
+    "name": "Hoshii",
+    "url": "https://hoshii.com/careers",
+    "scan": true
+  },
+  {
+    "id": "cdds",
+    "name": "CDDS",
+    "url": "https://join.com/companies/cddsai",
+    "scan": true
+  },
+  {
+    "id": "flexion",
+    "name": "Flexion",
+    "url": "https://flexion.ai/careers",
+    "scan": true
+  },
+  {
+    "id": "rivr",
+    "name": "RIVR",
+    "url": "https://rivr.ai/careers",
+    "scan": true
+  },
+  {
+    "id": "sartiq",
+    "name": "Sartiq",
+    "url": "https://sartiq.com/careers",
+    "scan": true
+  },
+  {
+    "id": "mimic",
+    "name": "mimic",
+    "url": "https://mimic.tech/careers",
+    "scan": true
+  },
+  {
+    "id": "scandit",
+    "name": "Scandit",
+    "url": "https://www.scandit.com/company/careers/",
+    "scan": true
+  },
+  {
+    "id": "lightly",
+    "name": "Lightly",
+    "url": "https://lightly.ai/careers",
+    "scan": true
+  },
+  {
+    "id": "ikerian",
+    "name": "RetinAI (Ikerian)",
+    "url": "https://apply.workable.com/retinai/#jobs",
+    "scan": true
+  },
+  {
+    "id": "swiss_biotech",
+    "name": "Swiss Biotech (job board)",
+    "url": "https://www.swissbiotech.org/jobs/?sp=97",
+    "scan": true
+  },
+  {
+    "id": "axion_biosystems",
+    "name": "Axion Biosystems",
+    "url": "https://recruiting.paylocity.com/recruiting/jobs/All/315cd416-aaaf-4d43-807d-8b086f3790eb/Axion-Biosystems-Inc",
+    "scan": true
+  }
+]
